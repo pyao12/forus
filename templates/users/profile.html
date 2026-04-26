@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}ForUs | 个人中心{% endblock %}
+{% block content %}
+    <section class="grid">
+        <div class="card hero-card">
+            <div class="eyebrow">Profile</div>
+            <h1>欢迎回来，{{ user.username }}。</h1>
+            <p class="lead">这是你的个人中心页面。</p>
+            <div class="actions">
+                <a class="button button-primary" href="{% url 'users:logout' %}">退出登录</a>
+                <a class="button button-ghost" href="{% url 'users:home' %}">返回首页</a>
+            </div>
+        </div>
+        <div class="card auth-card">
+            <h2 class="section-title">账号信息</h2>
+            <div class="profile-list">
+                <div class="profile-item">
+                    <div class="muted">用户名</div>
+                    <div>{{ user.username }}</div>
+                </div>
+                <div class="profile-item">
+                    <div class="muted">邮箱</div>
+                    <div>{% if user.email %}{{ user.email }}{% else %}未填写{% endif %}</div>
+                </div>
+                <div class="profile-item">
+                    <div class="muted">状态</div>
+                    <div>已登录</div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

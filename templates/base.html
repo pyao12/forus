@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{% block title %}ForUs{% endblock %}</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/site.css' %}" />
+    </head>
+    <body>
+        <div class="shell">
+            <header class="topbar">
+                <a class="brand" href="{% url 'users:home' %}">
+                    <span class="brand-mark"></span>
+                    <span>ForUs</span>
+                </a>
+                <nav class="nav">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'users:profile' %}">个人中心</a>
+                        <a href="{% url 'users:logout' %}">退出</a>
+                    {% else %}
+                        <a href="{% url 'users:login' %}">登录</a>
+                        <a href="{% url 'users:register' %}">注册</a>
+                    {% endif %}
+                </nav>
+            </header>
+        </div>
+
+        <main class="page">
+            <div class="shell">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="notice {{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </body>
+</html>
