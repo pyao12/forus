@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}ForUs | {{ post.name }}{% endblock %}
+{% block content %}
+    <section class="detail-layout">
+        <article class="detail-card card">
+            <div class="detail-meta">
+                <div class="eyebrow">Post Detail</div>
+                <h1 class="detail-title">{{ post.name }}</h1>
+                <div class="detail-author">Author: {{ post.author.username }}</div>
+                <div class="detail-time">{{ post.create_dt|date:"Y-m-d H:i" }}</div>
+            </div>
+
+            <div class="detail-content">
+                {{ post.content|linebreaks }}
+            </div>
+        </article>
+    </section>
+{% endblock %}

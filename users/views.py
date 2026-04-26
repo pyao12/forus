@@ -3,13 +3,14 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
+from discuss.models import Post
+
 from .forms import LoginForm, RegisterForm
 
 
 def home(request):
-    if request.user.is_authenticated:
-        return redirect("users:profile")
-    return render(request, "users/home.html")
+    posts = Post.objects.select_related("author").order_by("-create_dt")
+    return render(request, "users/home.html", {"posts": posts})
 
 
 def login_view(request):

@@ -1,11 +1,22 @@
 {% extends "base.html" %}
 {% block title %}ForUs | 首页{% endblock %}
 {% block content %}
-    <section class="grid">
-        <div class="card hero-card">
-            <div class="eyebrow">Placeholder</div>
-            <h1>首页占位符</h1>
-            <p class="lead">这里先保留空位orz</p>
-        </div>
+    <section class="feed">
+        {% if posts %}
+            <div class="post-stream">
+                {% for post in posts %}
+                    <article class="post-card">
+                        <a class="post-title" href="{% url 'discuss:post_detail' post.pk %}">
+                            {{ post.name }}
+                        </a>
+                        <div class="post-author">Author: {{ post.author.username }}</div>
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state card">
+                <p class="muted">暂无帖子。</p>
+            </div>
+        {% endif %}
     </section>
 {% endblock %}
